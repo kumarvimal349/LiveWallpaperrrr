@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">wallpaper HD</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Share</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nav_header_title">Wallpaper HD</string>
+
+    <string name="browser">Browser...</string>
+    <string name="upload">Upload</string>
+    <string name="action_share">action_share</string>
+    <string name="Share">Share</string>
+    <string name="submit">submit</string>
+
+    <string name="facebook_app_id" translatable="false">302050103772994</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb302050103772994</string>
+
+
+</resources>

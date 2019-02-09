@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "541272229683",
+    "firebase_url": "https://wallpaper-1849d.firebaseio.com",
+    "project_id": "wallpaper-1849d",
+    "storage_bucket": "wallpaper-1849d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541272229683:android:dc9deffa49813d71",
+        "android_client_info": {
+          "package_name": "com.vimal.me.wallpaper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "541272229683-mg5o85vjqsrl7ta0pgjljj2l83dogmvm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vimal.me.wallpaper",
+            "certificate_hash": "d7f5fbbaedc9b68192af7a0a687dd764734ed28d"
+          }
+        },
+        {
+          "client_id": "541272229683-grfqk8o48hhddeljahke2fvtdpookgv0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg5z5-OVNa1wcFV4UzhKTkwgJQogXgQoM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "541272229683-grfqk8o48hhddeljahke2fvtdpookgv0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
