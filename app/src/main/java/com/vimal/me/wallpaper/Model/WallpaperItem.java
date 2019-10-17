@@ -19,16 +19,16 @@ public class WallpaperItem {
         return imageLink;
     }
 
-    public static void setImageLink(String imageLink) {
-       imageLink = imageLink;
+    public void setImageLink(String imageLink) {
+       this.imageLink = imageLink;
     }
 
     public String getCategoryId() {
         return categoryId;
     }
 
-    public static void setCategoryId(String categoryId) {
-        categoryId = categoryId;
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
     public long getViewCount() {

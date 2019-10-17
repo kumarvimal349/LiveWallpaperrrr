@@ -3,8 +3,7 @@ package com.vimal.me.wallpaper.Common;
 
 
 import com.vimal.me.wallpaper.Model.WallpaperItem;
-import com.vimal.me.wallpaper.Remote.IComputerVision;
-import com.vimal.me.wallpaper.Remote.RetrofitClient;
+
 
 public class Common {
 
@@ -21,17 +20,6 @@ public class Common {
     public static WallpaperItem select_background = new WallpaperItem();
     public static String select_background_key;
 
-//API
-    public static String BASE_URL="https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/";
-    public static IComputerVision getComputerVisionAPI()
-    {
-    return RetrofitClient.getClient(BASE_URL).create(IComputerVision.class);
-    }
-
-    public static String getAPIAdultEndPoint()
-    {
-        return new StringBuilder(BASE_URL).append("analyze?visualFeatures=Adult&language=en").toString();
-    }
 
 }
 

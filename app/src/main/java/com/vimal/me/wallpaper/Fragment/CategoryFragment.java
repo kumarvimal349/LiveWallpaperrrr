@@ -3,9 +3,9 @@ package com.vimal.me.wallpaper.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +14,9 @@ import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+//
+//import com.google.android.gms.ads.AdRequest;
+//import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Callback;
@@ -31,16 +34,22 @@ public class CategoryFragment extends Fragment {
 
 
 
+
     //firebase
     FirebaseDatabase database;
     DatabaseReference categoryBackground;
     RecyclerView recyclerView;
+
+
 
     //Firebase adapter
     FirebaseRecyclerOptions<CategoryItem> options;
     FirebaseRecyclerAdapter<CategoryItem,CategoryViewHolder> adapter;
 
     private  static CategoryFragment  INSTANCE=null;
+
+
+
 
     public CategoryFragment() {
         database=FirebaseDatabase.getInstance();
@@ -123,17 +132,23 @@ public class CategoryFragment extends Fragment {
     }
 
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//
+//
+//
+//    }
 
-    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_category, container, false);
@@ -145,7 +160,17 @@ public class CategoryFragment extends Fragment {
         setCategory();
 
         return view;
+
+
+
+
+
+
     }
+
+
+
+
 
     private void setCategory() {
         adapter.startListening();
@@ -153,6 +178,7 @@ public class CategoryFragment extends Fragment {
     }
 
 // ctrl o
+
 
 
     @Override
@@ -180,5 +206,8 @@ public class CategoryFragment extends Fragment {
             adapter.startListening();
 
     }
+
+
+
 
 }

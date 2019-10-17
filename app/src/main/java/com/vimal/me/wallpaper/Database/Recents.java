@@ -1,9 +1,9 @@
 package com.vimal.me.wallpaper.Database;
 
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.support.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.annotation.NonNull;
 
 
 @Entity(tableName = "recents",primaryKeys = {"imageLink","categoryId"})
@@ -24,7 +24,6 @@ public class Recents {
     @ColumnInfo(name = "key")
     private String key;
 
-
     public Recents(@NonNull String imageLink, @NonNull String categoryId, String saveTime, String key) {
         this.imageLink = imageLink;
         this.categoryId = categoryId;
@@ -32,19 +31,21 @@ public class Recents {
         this.key = key;
     }
 
+    @NonNull
     public String getImageLink() {
         return imageLink;
     }
 
-    public void setImageLink(String imageLink) {
+    public void setImageLink(@NonNull String imageLink) {
         this.imageLink = imageLink;
     }
 
+    @NonNull
     public String getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(@NonNull String categoryId) {
         this.categoryId = categoryId;
     }
 

@@ -4,39 +4,23 @@
     package="com.vimal.me.wallpaper">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/back"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".UploadWallpaper"></activity>
-        <activity android:name=".Aboutus" />
-
-        <meta-data xmlns:tools="http://schemas.android.com/tools"
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"
-            tools:replace="android:value" />
-
-        <provider
-            android:name="com.facebook.FacebookContentProvider"
-            android:authorities="com.facebook.app.FacebookContentProvider302050103772994"
-             />
-
+        android:theme="@style/Theme.AppCompat">
+        <activity android:name=".Aboutus"/>
         <activity
-            android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
-            android:excludeFromRecents="true"
-            android:exported="true"
-            android:launchMode="singleInstance"
-            android:permission="com.google.firebase.auth.api.gms.permission.LAUNCH_FEDERATED_SIGN_IN"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            tools:replace="android:launchMode" />
-        <activity android:name=".MainActivity">
+            android:name=".MainActivity"
+            android:theme="@style/FullScreenTheme">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,10 +29,21 @@
         </activity>
         <activity
             android:name=".HomeActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ListWallpaper" />
-        <activity android:name=".ViewWallapaper" />
+             />
+        <activity android:name=".ListWallpaper"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+        <activity android:name=".ViewWallapaper"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+
+
+
+
+          <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5478250058767732~9197310589"/>
+
     </application>
 
 </manifest>

@@ -2,7 +2,7 @@ package com.vimal.me.wallpaper.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +14,6 @@ import com.squareup.picasso.Picasso;
 import com.vimal.me.wallpaper.Common.Common;
 import com.vimal.me.wallpaper.Database.Recents;
 import com.vimal.me.wallpaper.Interface.ItemClickListener;
-import com.vimal.me.wallpaper.ListWallpaper;
 import com.vimal.me.wallpaper.Model.WallpaperItem;
 import com.vimal.me.wallpaper.R;
 import com.vimal.me.wallpaper.ViewHolder.ListWallpaperViewHolder;
@@ -82,8 +81,8 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<ListWallpaperViewHol
             public void onclick(View view, int position) {
                 Intent intent = new Intent(context,ViewWallapaper.class);
                 WallpaperItem wallpaperItem = new WallpaperItem();
-                WallpaperItem .setCategoryId(recents.get(position).getCategoryId());
-                WallpaperItem.setImageLink(recents.get(position).getImageLink());
+                wallpaperItem .setCategoryId(recents.get(position).getCategoryId());
+                wallpaperItem.setImageLink(recents.get(position).getImageLink());
                 Common.select_background=wallpaperItem;
                 Common.select_background_key =recents.get(position).getKey();
                 context.startActivity(intent);

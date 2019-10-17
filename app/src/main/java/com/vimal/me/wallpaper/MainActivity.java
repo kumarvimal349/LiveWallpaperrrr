@@ -1,18 +1,10 @@
 package com.vimal.me.wallpaper;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Handler;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
-import android.util.Log;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                startActivity(intent);
+                Intent homeintent = new Intent(MainActivity.this, HomeActivity.class);
+                startActivity(homeintent);
                 finish();
             }
         }, SPLASH_TIME_OUT);

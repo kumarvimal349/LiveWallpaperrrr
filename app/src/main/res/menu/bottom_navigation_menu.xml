@@ -9,9 +9,9 @@
         android:icon="@drawable/rate"
         android:title="Rate us"/>
 
-    <item android:id="@+id/action_upload"
-        android:icon="@drawable/ic_cloud"
-        android:title="Upload"/>
+    <item android:id="@+id/share"
+        android:icon="@drawable/ic_menu_share"
+        android:title="Share"/>
 
 
 </menu>

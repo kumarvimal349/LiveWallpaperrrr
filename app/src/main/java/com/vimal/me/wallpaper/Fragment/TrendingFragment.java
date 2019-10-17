@@ -1,22 +1,20 @@
 package com.vimal.me.wallpaper.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.app.Fragment;
-import android.widget.LinearLayout;
+import androidx.fragment.app.Fragment;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -24,8 +22,8 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.vimal.me.wallpaper.Common.Common;
+
 import com.vimal.me.wallpaper.Interface.ItemClickListener;
-import com.vimal.me.wallpaper.ListWallpaper;
 import com.vimal.me.wallpaper.Model.WallpaperItem;
 import com.vimal.me.wallpaper.R;
 import com.vimal.me.wallpaper.ViewHolder.ListWallpaperViewHolder;
@@ -37,6 +35,8 @@ public class TrendingFragment extends Fragment {
     RecyclerView recyclerView;
     FirebaseDatabase database;
     DatabaseReference categoryBackground;
+
+
 
     FirebaseRecyclerOptions<WallpaperItem>options;
     FirebaseRecyclerAdapter<WallpaperItem,ListWallpaperViewHolder>adapter;
@@ -144,6 +144,9 @@ public class TrendingFragment extends Fragment {
 
 
         return  view;
+
+
+
     }
 
     private void loadTrendingList() {

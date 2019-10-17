@@ -1,38 +1,39 @@
-
 package com.vimal.me.wallpaper;
 
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.WallpaperManager;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
+
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.share.Sharer;
-import com.facebook.share.model.SharePhoto;
-import com.facebook.share.model.SharePhotoContent;
-import com.facebook.share.widget.ShareDialog;
-import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -52,19 +53,16 @@ import com.vimal.me.wallpaper.Model.WallpaperItem;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observable;
 import java.util.UUID;
 
 import dmax.dialog.SpotsDialog;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
-import io.reactivex.internal.operators.observable.ObservableScalarXMap;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -74,17 +72,16 @@ public class ViewWallapaper extends AppCompatActivity {
     FloatingActionButton floatingActionButton, fabDownload;
     CoordinatorLayout rootLayout;
 
-    FloatingActionMenu mainFloating;
-    com.github.clans.fab.FloatingActionButton fbshare;
+
+    private AdView mAdView;
+
+
 
     //Room Database
     CompositeDisposable compositeDisposable;
     RecentRepository recentRepository;
 
 
-    //Facebook
-    CallbackManager callbackManager;
-    ShareDialog shareDialog;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -116,13 +113,23 @@ public class ViewWallapaper extends AppCompatActivity {
 
         @Override
         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-            WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
-            try {
-                wallpaperManager.setBitmap(bitmap);
-                Snackbar.make(rootLayout, "Wallpaper was set", Snackbar.LENGTH_SHORT).show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//          //  WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
+//            final WallpaperManager wallpaperManager = (WallpaperManager)getSystemService(
+//                    Context.WALLPAPER_SERVICE);
+//
+//
+//
+//            try {
+//
+//                wallpaperManager.setBitmap(bitmap);
+//              //  Toast.makeText(CropImageActivity.this, CropImageActivity.this.getString(R.string.wallpaper_has_been_set), 0).show();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//               // Toast.makeText(CropImageActivity.this, "Wallpaper not set", 0).show();
+//            }
+
+
+            setWallpaper(bitmap);
         }
 
         @Override
@@ -138,47 +145,32 @@ public class ViewWallapaper extends AppCompatActivity {
 
     };
 
-    private Target facebookConvertBitmap = new Target() {
-        @Override
-        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-            SharePhoto sharePhoto = new SharePhoto.Builder()
-                    .setBitmap(bitmap)
-                    .build();
-            if (ShareDialog.canShow(SharePhotoContent.class))
-            {
-                SharePhotoContent content = new SharePhotoContent.Builder()
-                        .addPhoto(sharePhoto)
-                        .build();
-                shareDialog.show(content);
-            }
-        }
 
-        @Override
-        public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-
-        }
-
-
-        @Override
-        public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_wallapaper);
 
+
+
+
+        MobileAds.initialize(this,
+                "ca-app-pub-5478250058767732~9197310589");
+
+
+
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("4E92B109A7C8C78B74453660166B98C6").build();
+        mAdView.loadAd(adRequest);
+
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-        //Init Facebook
-        callbackManager = CallbackManager.Factory.create();
-        shareDialog = new ShareDialog(this);
 
 
 
@@ -262,13 +254,12 @@ public class ViewWallapaper extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChild("viewcount"))
-                        {
+                        if (dataSnapshot.hasChild("viewcount")) {
                             WallpaperItem wallpaperItem = dataSnapshot.getValue(WallpaperItem.class);
-                            long count = wallpaperItem.getViewCount()+1;
+                            long count = wallpaperItem.getViewCount() + 1;
                             //Update
-                            Map<String,Object>update_view = new HashMap<>();
-                            update_view.put("viewcount",count);
+                            Map<String, Object> update_view = new HashMap<>();
+                            update_view.put("viewcount", count);
 
                             FirebaseDatabase.getInstance()
                                     .getReference(Common.STR_CATEGORY_BACKGROUND)
@@ -283,14 +274,13 @@ public class ViewWallapaper extends AppCompatActivity {
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(ViewWallapaper.this,"Cannot update view count",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(ViewWallapaper.this, "Cannot update view count", Toast.LENGTH_SHORT).show();
                                         }
                                     });
-                        }
-                        else //if view count is not set default
+                        } else //if view count is not set default
                         {
-                            Map<String,Object>update_view = new HashMap<>();
-                            update_view.put("viewcount",Long.valueOf(1));
+                            Map<String, Object> update_view = new HashMap<>();
+                            update_view.put("viewcount", Long.valueOf(1));
 
                             FirebaseDatabase.getInstance()
                                     .getReference(Common.STR_CATEGORY_BACKGROUND)
@@ -305,7 +295,7 @@ public class ViewWallapaper extends AppCompatActivity {
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(ViewWallapaper.this,"Cannot set default view count",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(ViewWallapaper.this, "Cannot set default view count", Toast.LENGTH_SHORT).show();
                                         }
                                     });
                         }
@@ -319,44 +309,7 @@ public class ViewWallapaper extends AppCompatActivity {
                 });
 
 
-
-        mainFloating = (FloatingActionMenu) findViewById(R.id.menu);
-        fbshare= (com.github.clans.fab.FloatingActionButton)findViewById(R.id.fb_share);
-        fbshare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //create callback
-                shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
-
-                    @Override
-                    public void onSuccess(Sharer.Result result) {
-                        Toast.makeText(ViewWallapaper.this,"Share Successful",Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        Toast.makeText(ViewWallapaper.this,"Share cancelled !",Toast.LENGTH_SHORT).show();
-
-
-                    }
-
-                    @Override
-                    public void onError(FacebookException error) {
-                        Toast.makeText(ViewWallapaper.this,""+error.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                //we will fetch photo from link and convert to bitmap
-                Picasso.get()
-                        .load(Common.select_background.getImageLink())
-                        .into(facebookConvertBitmap);
-
-
-            }
-        });
     }
-
 
 
     private  void  addToRecents(){
@@ -366,7 +319,6 @@ public class ViewWallapaper extends AppCompatActivity {
 
             @Override
             public void subscribe(ObservableEmitter<Object> e) throws Exception {
-
                 Recents recents = new Recents(Common.select_background.getImageLink(),
                         Common.select_background.getCategoryId(),
                         String.valueOf(System.currentTimeMillis()),
@@ -411,6 +363,59 @@ public class ViewWallapaper extends AppCompatActivity {
         if (item.getItemId() == android.R.id.home)
             finish();   // class activity when back button
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void setWallpaper(final Bitmap bitmp)
+    {
+        int  screenWidth=getWallpaperDesiredMinimumWidth();
+        int    screenHeight=getWallpaperDesiredMinimumHeight();
+        try {
+
+            WallpaperManager    wallpaperManager = WallpaperManager.getInstance(this);
+
+
+            Bitmap btm = getResizedBitmap(bitmp, screenHeight, screenWidth);
+            wallpaperManager.setBitmap(btm);
+            Toast toast=Toast.makeText(this, "wallpaper has been set", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 0);
+            toast.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
+
+        int width = bm.getWidth();
+
+        int height = bm.getHeight();
+
+        float scaleWidth = ((float) newWidth) / width;
+
+        float scaleHeight = ((float) newHeight) / height;
+
+        /**
+         *  create a matrix for the manipulation
+         */
+
+        Matrix matrix = new Matrix();
+
+        /**
+         *  resize the bit map
+         */
+
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        /**
+         * recreate the new Bitmap
+         */
+
+        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+
+        return resizedBitmap;
+
     }
 }
 

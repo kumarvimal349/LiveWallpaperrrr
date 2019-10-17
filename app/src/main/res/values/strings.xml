@@ -17,9 +17,7 @@
     <string name="action_share">action_share</string>
     <string name="Share">Share</string>
     <string name="submit">submit</string>
-
-    <string name="facebook_app_id" translatable="false">302050103772994</string>
-    <string name="facebook_login_protocol_scheme" translatable="false">fb302050103772994</string>
+    <string name="admob_app_id">ca-app-pub-5478250058767732~9197310589</string>
 
 
 </resources>

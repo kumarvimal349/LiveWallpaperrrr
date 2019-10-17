@@ -4,9 +4,9 @@ package com.vimal.me.wallpaper.Fragment;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +45,7 @@ public class RecentFragment extends Fragment {
     CompositeDisposable compositeDisposable;
     RecentRepository recentRepository;
 
-    @SuppressLint("ValidFragment")
+
     public RecentFragment(Context context) {
         // Required empty public constructor
         this.context= context;
